@@ -1,0 +1,33 @@
+.floor .floorImg {
+  height: 350rpx;
+  width: 100%;
+}
+.floor .floorScroll {
+  display: flex;
+  height: 300rpx;
+}
+.floor .floorScroll .scrollItem {
+  width: 200rpx;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20rpx;
+}
+.floor .floorScroll .scrollItem.single {
+  width: 200rpx;
+  height: 300rpx;
+  flex-shrink: 0;
+  text-align: center;
+  line-height: 300rpx;
+}
+.floor .floorScroll .scrollItem .itemImg {
+  width: 200rpx;
+  height: 200rpx;
+}
+.floor .floorScroll .scrollItem .itemText {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 28rpx;
+}
+
