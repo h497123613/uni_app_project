@@ -10,22 +10,22 @@
 		</view>
 		<!-- Nav-scroll-view -->
 		<scroll-view scroll-x enable-flex class="navScroll">
-			<view class="navItem active" >推荐</view>
-			<view class="navItem" v-for="(nav,index) in navList" :key="nav.id">{{nav.text}}</view>
+			<view @click="currentId = -1" class="navItem" :class="currentId === -1 && 'active'" >推荐</view>
+			<view @click="currentId = nav.L1Id" class="navItem" :class="currentId === nav.L1Id && 'active'" v-for="(nav,index) in navList" :key="nav.L1Id">{{nav.text}}</view>
 		</scroll-view>
 		<!-- scroll-view主要内容 -->
 		<scroll-view scroll-y="true" class="mainScroll" enable-flex>
-			<view class="mainItem">
+			<view class="mainItem" v-show="currentId === -1">
 				<swiper class="mainSwiper" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
 					<swiper-item>
 						<view class="swiper-item">
 							<image src="../../static/images/swiper/swiper1.jpg"></image>
 						</view>
-					</swiper-item><swiper-item>
+					<!-- </swiper-item><swiper-item>
 						<view class="swiper-item">
 							<image src="../../static/images/swiper/swiper2.jpg"></image>
 						</view>
-					</swiper-item><swiper-item>
+					</swiper-item><swiper-item> -->
 						<view class="swiper-item">
 							<image src="../../static/images/swiper/swiper3.jpg"></image>
 						</view>
@@ -43,18 +43,28 @@
 							<text class="categoryText">{{category.text}}</text>
 					</view>
 				</view>
+				<Floor v-for="(floor,index) in floorList" :key="index" :floor="floor"></Floor>
 			</view>
-			<Floor v-for="(floor,index) in floorList" :key="index" :floor="floor"></Floor>
+			
+			<view v-show="currentId !== -1">
+				<Card :currentId="currentId"></Card>
+			</view>
 		</scroll-view>
 	</view>
 </template>
 
 <script>
 	import Floor from "./components/Floor"
+	import Card from "./components/Card"
 	import {mapGetters} from 'vuex'
 	export default{
+		data(){
+			return {
+				currentId:-1
+			}
+		},
 		components:{
-			Floor
+			Floor,Card
 		},
 		mounted(){
 			this.getIndexData()
