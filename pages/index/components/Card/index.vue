@@ -10,7 +10,7 @@
 		<view class="cardTitle">{{currentCard.frontDesc}}</view>
 		<view class="cardTitle">{{currentCard.frontName}}</view>
 		<view class="goodsList">
-			<view class="goodsItem" v-for="(item,index) in currentCard.itemList" :key="item.id">
+			<view @click="toDetail(item)" class="goodsItem" v-for="(item,index) in currentCard.itemList" :key="item.id">
 				<image class="goodsImg" :src="item.primaryPicUrl"></image>
 				<view class="goodsName">{{item.name}}</view>
 				<view class="goodsPrice">￥{{item.retailPrice}}</view>
@@ -32,6 +32,18 @@
 		methods: {
 			getCardList() {
 				this.$store.dispatch('getCardList')
+			},
+			//点击去往详情页
+			toDetail(goods){
+				//方式一
+				// wx.navigateTo({
+				// 	url:"/pages/detal/detail?goodsInfo=" + JSON.stringify(goods)
+				// })
+				//方式二
+				wx.setStorageSync('goodsInfo_key',goods)
+				wx.navigateTo({
+					url:"/pages/detail/detail"
+				})
 			}
 		},
 		computed: {

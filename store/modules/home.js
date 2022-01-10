@@ -20,7 +20,6 @@ const [state,mutations,actions,getters] = [{
 	},
 	async getCardList({commit}){
 		const result = await request('/getIndexCateList')
-		console.log(result)
 		commit('SET_CARDLIST',result)
 	}
 },{
